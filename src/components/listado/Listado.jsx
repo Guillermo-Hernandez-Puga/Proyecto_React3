@@ -1,33 +1,49 @@
-import React from 'react';
-import Card from "../Card/Card";
-import { BaseColaboradores } from "../baseColaboradores/BaseColaboradores";
 
-const Listado = ({ clientes }) => {
-  // Combina los colaboradores de BaseColaboradores con los clientes
-  const listaCompleta = [...BaseColaboradores, ...clientes];
+import Table from "react-bootstrap/Table";
+import { BiTrash } from "react-icons/bi";
 
+const Listado = ({ datosFilter, setbasedata, setdatosFilter, data }) => {
+  console.log("En listado", datosFilter);
+
+  const eliminarColaborador = (id) => {
+    const nuevoData = data.filter((persona) => persona.id !== id);
+    setbasedata(nuevoData);
+    setdatosFilter(nuevoData);
+  };
   return (
-    <>
-      <h1>Lista de Colaboradores</h1>
-      <table className="table">
-        <thead>
+    <div className=" table table-responsive ">
+      <Table bordered hover>
+        <thead >
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Edad</th>
-            <th scope="col">Cargo</th>
-            <th scope="col">Teléfono</th>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Edad</th>
+            <th>Cargo</th>
+            <th>Telefono</th>
+            <th>Eliminar</th>
           </tr>
         </thead>
-        <tbody >
-          {listaCompleta.map((persona) => (
-            <Card key={persona.id} cliente={persona} />
+        <tbody>
+          {datosFilter.map((persona) => (
+            <tr key={persona.id}>
+              <td>{persona.id}</td>
+              <td>{persona.nombre}</td>
+              <td>{persona.email}</td>
+              <td>{persona.edad}</td>
+              <td>{persona.cargo}</td>
+              <td>{persona.telefono}</td>
+              <td>
+                <p>
+                  <BiTrash onClick={(e) => eliminarColaborador(persona.id)} />
+                </p>
+              </td>
+            </tr>
           ))}
         </tbody>
-      </table>
-    </>
+      </Table>
+    </div>
   );
-}
+};
 
 export default Listado;
