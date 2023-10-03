@@ -1,41 +1,27 @@
+import Card from "../Card/Card";
 
-
-
-const Listado = () => {
+const Listado = ({ clientes }) => {
   return (
-    <div>
-      <h1>Base de datos colaboradores</h1>
-      <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-    </div>
-  )
+    <>
+      <h1>Listado de Clientes</h1>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>CORREO</th>
+            <th>EDAD</th>
+            <th>CARGO</th>
+          </tr>
+        </thead>
+        <tbody>
+          {clientes.map((cliente, index) => (
+            <Card key={index} cliente={cliente} />
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
 }
 
-export default Listado
+export default Listado;
