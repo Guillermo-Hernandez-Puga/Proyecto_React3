@@ -9,6 +9,7 @@ const Card  = ({cliente}) => {
     <td><span className="fw-normal">{cliente.email}</span></td>
     <td><span className="fw-normal">{cliente.edad}</span></td>
     <td><span className="fw-normal">{cliente.cargo}</span></td>
+    <td><span className="fw-normal">{cliente.telefono}</span></td>
   </tr>
   );
 }

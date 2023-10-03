@@ -1,6 +1,6 @@
 
 
-const Buscador = ({setPalabra}) => {
+const Buscador = ({setName}) => {
   return (
     <div>
           <h1>Buscador de clientes</h1>

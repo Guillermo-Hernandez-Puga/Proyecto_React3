@@ -1,22 +1,28 @@
+import React from 'react';
 import Card from "../Card/Card";
+import { BaseColaboradores } from "../baseColaboradores/BaseColaboradores";
 
 const Listado = ({ clientes }) => {
+  // Combina los colaboradores de BaseColaboradores con los clientes
+  const listaCompleta = [...BaseColaboradores, ...clientes];
+
   return (
     <>
-      <h1>Listado de Clientes</h1>
+      <h1>Lista de Colaboradores</h1>
       <table className="table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>NOMBRE</th>
-            <th>CORREO</th>
-            <th>EDAD</th>
-            <th>CARGO</th>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Teléfono</th>
           </tr>
         </thead>
-        <tbody>
-          {clientes.map((cliente, index) => (
-            <Card key={index} cliente={cliente} />
+        <tbody >
+          {listaCompleta.map((persona) => (
+            <Card key={persona.id} cliente={persona} />
           ))}
         </tbody>
       </table>
