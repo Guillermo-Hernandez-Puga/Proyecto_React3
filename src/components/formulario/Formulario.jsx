@@ -1,108 +1,125 @@
+
 import { useState } from "react";
 
-const Formulario = ({ clientes, setClientes }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [edad, setEdad] = useState("");
-  const [cargo, setCargo] = useState("");
-  const [telefono, setTelefono] = useState("");
-  const [error, setError] = useState(false);
-  const [mensaje, setMensaje] = useState("");
+const Formulario = ({
+  data,
+  setbasedata,
+  setdatosFilter,
+  setMyAlert,
+}) => {
+  const [dataC, setDataC] = useState({
+    nombre: "",
+    email: "",
+    edad: "",
+    cargo: "",
+    telefono: "",
+  });
 
-  
-  const [contadorId, setContadorId] = useState(4);
-
-  const handleSubmit = (e) => {
+  const validar = (e) => {
     e.preventDefault();
-
-    if (!name || !email || !edad || !cargo || !telefono) {
-      setError(true);
-      setMensaje("Todos los campos son obligatorios");
-      return;
+    const { nombre, email, edad, cargo, telefono } = dataC;
+    console.log("datac", dataC.email);
+    const noData =
+      !nombre.trim() ||
+      !email.trim() ||
+      !edad.trim() ||
+      console.log(dataC.email);
+    !cargo.trim() || !telefono.trim();
+    if (noData) {
+      setMyAlert({
+        error: true,
+        msg: "Debe de llenar todos los campos!",
+        color: "alert alert-danger mt-3",
+      });
     } else {
-      setError(false);
+      setMyAlert({
+        error: false,
+        msg: "Colaborador creado",
+        color: "alert alert-success mt-3",
+      });
+      const nuevocolaborardor = { ...dataC, id: data.length + 1 };
+      console.log("nuevoC", nuevocolaborardor);
+      if (!setMyAlert.error) {
+        setbasedata([...data, nuevocolaborardor]);
+        console.log(nuevocolaborardor);
+        setdatosFilter([...data, nuevocolaborardor]);
+        console.log(nuevocolaborardor);
+      }
+    }
+  };
 
-     
-      const id = contadorId;
-
-     
-      setContadorId(contadorId + 1);
-
-      alert("Formulario enviado");
-
-      
-      const cliente = { id, name, email, edad, cargo, telefono};
-
-      
-      setClientes([...clientes, cliente]);
-
-      
-      setName("");
-      setEmail("");
-      setEdad("");
-      setCargo("");
-      setTelefono("");
+  const handle = (e) => {
+    const id = {
+      idNombre: "nombre",
+      idEmail: "email",
+      idEdad: "edad",
+      idCargo: "cargo",
+      idTelefono: "telefono",
+    };
+    const imp = id[e.target.id];
+    if (imp) {
+      setDataC({ ...dataC, [imp]: e.target.value });
+      console.log(setDataC);
     }
   };
 
   return (
-    <div className="w-50">
-      <h1> Agregar Clientes</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="input-group mb-3 w-50">
-          {error && <p className="text-danger">{mensaje}</p>}
+    <div className="text-center ">
+      <h4>Agregar Colaborador</h4>
+      <form onSubmit={validar}>
+        <div>
           <input
             type="text"
-            name="name"
-            className="form-control"
-            placeholder="Nombre"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={dataC.nombre}
+            className="mt-3"
+            placeholder="Nombre del Colaborador"
+            id="idNombre"
+            onChange={handle}
           />
         </div>
-        <div className="input-group mb-3 w-50">
+        <div>
           <input
             type="email"
-            name="email"
-            className="form-control"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={dataC.email}
+            className="mt-3"
+            placeholder="Email del Colaborador"
+            id="idEmail"
+            onChange={handle}
           />
         </div>
-        <div className="input-group mb-3 w-50">
-          <input
-            type="number"
-            name="edad"
-            className="form-control"
-            placeholder="Edad"
-            value={edad}
-            onChange={(e) => setEdad(e.target.value)}
-          />
-        </div>
-        <div className="input-group mb-3 w-50">
+        <div>
           <input
             type="text"
-            name="cargo"
-            className="form-control"
-            placeholder="Cargo"
-            value={cargo}
-            onChange={(e) => setCargo(e.target.value)}
+            value={dataC.edad}
+            className="mt-3"
+            placeholder="Edad de Colaborador"
+            id="idEdad"
+            onChange={handle}
           />
         </div>
-        <div className="input-group mb-3 w-50">
+        <div>
           <input
             type="text"
-            name="telefono"
-            className="form-control"
-            placeholder="telefono"
-            value={telefono}
-            onChange={(e) => setTelefono(e.target.value)}
+            value={dataC.cargo}
+            className="mt-3"
+            placeholder="Cargo del Colaborador"
+            id="idCargo"
+            onChange={handle}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Agregar
-        </button>
+        <div>
+          <input
+            type="text"
+            value={dataC.telefono}
+            className="mt-3"
+            placeholder="Telefono del Colaborador"
+            id="idTelefono"
+            onChange={handle}
+          />
+        </div>
+        <div className="mt-3">
+          <button type="submit">Agregar</button>
+        </div>
       </form>
     </div>
   );
