@@ -28,9 +28,10 @@ function App() {
             setbasedata={setbasedata}
             datosFilter={datosFilter}
             setdatosFilter={setdatosFilter}
+            className="form"
           />
         </div>
-        <div className="ms-5">
+        <div className="ms-5 border bg-white formulario">
           <Formulario
             data={data}
             setbasedata={setbasedata}
