@@ -37,6 +37,13 @@ const Formulario = ({
         msg: "Colaborador creado",
         color: "alert alert-success mt-3",
       });
+      setDataC({
+        nombre: "",
+        email: "",
+        edad: "",
+        cargo: "",
+        telefono: "",
+      });
       const nuevocolaborardor = { ...dataC, id: data.length + 1 };
       console.log("nuevoC", nuevocolaborardor);
       if (!setMyAlert.error) {
