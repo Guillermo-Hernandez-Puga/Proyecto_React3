@@ -11,7 +11,7 @@ const Listado = ({ datosFilter, setbasedata, setdatosFilter, data }) => {
     setdatosFilter(nuevoData);
   };
   return (
-    <div className=" table table-responsive ">
+    <div className=" table table-responsive">
       <Table bordered hover>
         <thead >
           <tr>
@@ -35,7 +35,7 @@ const Listado = ({ datosFilter, setbasedata, setdatosFilter, data }) => {
               <td>{persona.telefono}</td>
               <td>
                 <p>
-                  <BiTrash onClick={(e) => eliminarColaborador(persona.id)} />
+                  <BiTrash onClick={(e) => eliminarColaborador(persona.id)}/>
                 </p>
               </td>
             </tr>
